@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Liam | Systems & Automation Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0c0d0f;
+    --bg2: #111316;
+    --bg3: #181b1f;
+    --border: #232629;
+    --accent: #00e5c8;
+    --accent2: #ff6b35;
+    --text: #e8e6e0;
+    --text-muted: #7a7d85;
+    --text-dim: #4a4d55;
+    --card: #13151a;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Crimson Pro', serif;
+    font-size: 18px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 4rem;
+    background: rgba(12,13,15,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.85rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 8rem 4rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.4;
+    mask-image: radial-gradient(ellipse 80% 80% at 70% 50%, black 20%, transparent 75%);
+  }
+
+  .hero-glow {
+    position: absolute;
+    top: 10%; right: -10%;
+    width: 60vw; height: 60vw;
+    background: radial-gradient(circle, rgba(0,229,200,0.06) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.78rem;
+    color: var(--accent);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 800;
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+  }
+
+  h1 .accent-name { color: var(--accent); }
+
+  .hero-sub {
+    font-size: 1.15rem;
+    font-weight: 300;
+    color: var(--text-muted);
+    max-width: 480px;
+    line-height: 1.75;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-sub em { color: var(--text); font-style: italic; }
+
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 0.85rem 2rem;
+    background: var(--accent);
+    color: var(--bg);
+    border: none;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0,229,200,0.25);
+  }
+
+  .btn-ghost {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 0.85rem 2rem;
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .btn-ghost:hover { color: var(--text); border-color: var(--text-muted); }
+
+  .hero-stats {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding-left: 4rem;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+
+  .stat-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 1.5rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--accent);
+  }
+
+  .stat-card.orange::before { background: var(--accent2); }
+
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 800;
+    line-height: 1;
+    color: var(--accent);
+    margin-bottom: 0.3rem;
+  }
+
+  .stat-card.orange .stat-num { color: var(--accent2); }
+
+  .stat-label {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+  }
+
+  /* ── SECTIONS ── */
+  section {
+    padding: 7rem 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+  }
+
+  .section-num {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.75rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+  }
+
+  h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    font-weight: 800;
+    letter-spacing: -0.01em;
+  }
+
+  .divider {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ── ABOUT ── */
+  #about .about-grid {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .about-text p {
+    font-size: 1.15rem;
+    font-weight: 300;
+    line-height: 1.85;
+    color: var(--text-muted);
+    margin-bottom: 1.2rem;
+  }
+
+  .about-text p strong { color: var(--text); font-weight: 600; }
+  .about-text p em { color: var(--accent); font-style: italic; }
+
+  .about-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+
+  .meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    padding-bottom: 1.2rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .meta-key {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.68rem;
+    color: var(--text-dim);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .meta-val {
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: var(--text);
+  }
+
+  /* ── PROJECTS ── */
+  #projects .project-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5px;
+    background: var(--border);
+  }
+
+  .project-card {
+    background: var(--card);
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.2s;
+  }
+
+  .project-card:hover { background: var(--bg3); }
+
+  .project-card.featured {
+    grid-column: span 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .project-tag {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .project-tag::before {
+    content: '▸';
+    font-size: 0.6rem;
+  }
+
+  .project-tag.orange { color: var(--accent2); }
+
+  h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+    line-height: 1.2;
+  }
+
+  .project-desc {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+
+  .tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tech-pill {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    color: var(--text-dim);
+    border: 1px solid var(--border);
+    padding: 0.2rem 0.6rem;
+    transition: color 0.15s, border-color 0.15s;
+  }
+
+  .project-card:hover .tech-pill {
+    color: var(--text-muted);
+    border-color: var(--text-dim);
+  }
+
+  .project-number {
+    position: absolute;
+    bottom: 2rem; right: 2.5rem;
+    font-family: 'Syne', sans-serif;
+    font-size: 4rem;
+    font-weight: 800;
+    color: var(--bg3);
+    line-height: 1;
+    pointer-events: none;
+    transition: color 0.2s;
+  }
+
+  .project-card:hover .project-number { color: var(--border); }
+
+  /* ── EXPERIENCE ── */
+  #experience .exp-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .exp-item {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 3rem;
+    padding: 2.5rem 0;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+
+  .exp-item:first-child { padding-top: 0; }
+
+  .exp-date {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    letter-spacing: 0.08em;
+    padding-top: 0.3rem;
+  }
+
+  .exp-dot {
+    display: inline-block;
+    width: 6px; height: 6px;
+    background: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .exp-role {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+  }
+
+  .exp-company {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.75rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+  }
+
+  .exp-company.orange { color: var(--accent2); }
+
+  .exp-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .exp-bullets li {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    padding-left: 1.2rem;
+    position: relative;
+  }
+
+  .exp-bullets li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--text-dim);
+  }
+
+  .exp-bullets li strong { color: var(--text); }
+
+  /* ── SKILLS ── */
+  #skills .skills-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.5px;
+    background: var(--border);
+    margin-bottom: 3rem;
+  }
+
+  .skill-group {
+    background: var(--card);
+    padding: 2rem;
+  }
+
+  .skill-group-title {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.2rem;
+  }
+
+  .skill-group-title.orange { color: var(--accent2); }
+  .skill-group-title.dim { color: var(--text-dim); }
+
+  .skill-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .skill-list li {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .skill-list li::before {
+    content: '';
+    display: block;
+    width: 4px; height: 4px;
+    background: var(--border);
+    flex-shrink: 0;
+  }
+
+  .certs-row {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .cert-badge {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 1.2rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    position: relative;
+  }
+
+  .cert-badge.active::after {
+    content: 'EARNED';
+    position: absolute;
+    top: 0.6rem; right: 0.8rem;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+  }
+
+  .cert-badge.in-progress::after {
+    content: 'IN PROGRESS';
+    position: absolute;
+    top: 0.6rem; right: 0.8rem;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.15em;
+    color: var(--accent2);
+  }
+
+  .cert-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  .cert-issuer {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.68rem;
+    color: var(--text-dim);
+    letter-spacing: 0.08em;
+  }
+
+  /* ── CONTACT / BRANDING ── */
+  #contact {
+    border-top: 1px solid var(--border);
+    padding: 7rem 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .contact-intro {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.8rem, 3vw, 3rem);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-intro span { color: var(--accent); }
+
+  .contact-sub {
+    font-size: 1rem;
+    color: var(--text-muted);
+    font-weight: 300;
+    max-width: 500px;
+    line-height: 1.75;
+    margin-bottom: 2rem;
+  }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+    padding: 1rem 1.5rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .contact-link:hover { border-color: var(--accent); background: var(--bg3); }
+
+  .contact-link-icon {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    min-width: 80px;
+  }
+
+  .contact-link-text {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+  }
+
+  .resume-block {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 2rem;
+  }
+
+  .resume-title {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.68rem;
+    color: var(--text-dim);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .resume-items {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .resume-item {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .resume-item::before {
+    content: '✓';
+    color: var(--accent);
+    font-size: 0.75rem;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  footer p {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.68rem;
+    color: var(--text-dim);
+    letter-spacing: 0.08em;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.2rem; }
+    #hero { grid-template-columns: 1fr; padding: 6rem 1.5rem 3rem; }
+    .hero-stats { padding-left: 0; flex-direction: row; flex-wrap: wrap; }
+    .stat-card { flex: 1; min-width: 140px; }
+    section, #contact { padding: 4rem 1.5rem; }
+    #about .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    #projects .project-grid { grid-template-columns: 1fr; }
+    .project-card.featured { grid-column: span 1; grid-template-columns: 1fr; gap: 1.5rem; }
+    .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    #skills .skills-layout { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">liam.portfolio // v2026</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">Systems &amp; Automation Engineer</div>
+    <h1>Hi, I'm<br><span class="accent-name">Liam.</span></h1>
+    <p class="hero-sub">
+      I build <em>resilient infrastructure</em>, automate the tedious, and make systems talk to each other.
+      Recent CIT graduate from Ball State University, now working full-time in production
+      systems engineering at Kirby Risk — with ambitions pointed firmly at cloud and DevSecOps.
+    </p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn-primary">View My Work</a>
+      <a href="#contact" class="btn-ghost">Get In Touch</a>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat-card">
+      <div class="stat-num">1,600+</div>
+      <div class="stat-label">managed endpoints</div>
+    </div>
+    <div class="stat-card orange">
+      <div class="stat-num">8+</div>
+      <div class="stat-label">IaC / automation tools</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">3</div>
+      <div class="stat-label">certs active or in progress</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header fade-in">
+    <span class="section-num">01</span>
+    <h2>About Me</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="about-grid fade-in">
+    <div class="about-text">
+      <p>
+        I'm a <strong>Systems &amp; Automation Engineer</strong> with a B.S. in Computer Information Technology
+        (Networking Infrastructure concentration) from Ball State University, graduating May 2026.
+        What started as a deliberate career pivot in early 2024 has become something I'm genuinely
+        passionate about — <em>making infrastructure boring in the best possible way</em>.
+      </p>
+      <p>
+        At Kirby Risk, I work across PowerShell automation, vulnerability management (Tenable + NinjaOne),
+        and production endpoint infrastructure spanning over 1,600 managed devices. I don't just write
+        scripts — I build <strong>frameworks</strong> that scale.
+      </p>
+      <p>
+        My capstone project, <strong>ChirpLabs</strong>, is a fully automated student lab provisioning
+        platform I designed and built from scratch — Terraform, Packer, Ansible, Proxmox, Forgejo CI/CD,
+        Docker, PostgreSQL, and Active Directory all working in concert. It's the kind of project that
+        shows I can architect real systems, not just follow tutorials.
+      </p>
+      <p>
+        I'm currently pursuing <em>CompTIA Security+</em> and <em>AWS Solutions Architect – Associate</em>,
+        with an 18–24 month trajectory toward a cloud or DevSecOps role. I learn fast, I build things
+        that actually work, and I'm just getting started.
+      </p>
+    </div>
+    <div class="about-meta">
+      <div class="meta-item">
+        <span class="meta-key">Location</span>
+        <span class="meta-val">Muncie, Indiana</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-key">Degree</span>
+        <span class="meta-val">B.S. CIT — Networking Infrastructure<br>Ball State University, May 2026</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-key">Current Role</span>
+        <span class="meta-val">Systems &amp; Automation Engineer<br>Kirby Risk</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-key">Focus Areas</span>
+        <span class="meta-val">Cloud Infrastructure · DevSecOps · IaC · Automation</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-key">Certification Goal</span>
+        <span class="meta-val">Security+ · AWS SAA · CCNA (long-term)</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header fade-in">
+    <span class="section-num">02</span>
+    <h2>Projects</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="project-grid fade-in">
+
+    <!-- Featured: ChirpLabs -->
+    <div class="project-card featured">
+      <div>
+        <div class="project-tag">Capstone · Featured Project</div>
+        <h3>ChirpLabs</h3>
+        <p class="project-desc">
+          A fully automated student lab provisioning platform designed and built as my senior capstone.
+          ChirpLabs orchestrates the entire lifecycle of virtualized lab environments — from base image
+          creation to live student access — with zero manual intervention. Terraform provisions VM
+          infrastructure on Proxmox; Packer bakes hardened base images; Ansible handles post-provisioning
+          configuration; Forgejo CI/CD triggers pipelines on commit; Docker containerizes supporting
+          services; PostgreSQL tracks state; and Active Directory manages identity.
+        </p>
+        <div class="tech-stack">
+          <span class="tech-pill">Terraform</span>
+          <span class="tech-pill">Packer</span>
+          <span class="tech-pill">Ansible</span>
+          <span class="tech-pill">Proxmox</span>
+          <span class="tech-pill">Forgejo CI/CD</span>
+          <span class="tech-pill">Docker</span>
+          <span class="tech-pill">PostgreSQL</span>
+          <span class="tech-pill">Active Directory</span>
+        </div>
+      </div>
+      <div>
+        <div class="project-tag">Architecture Highlights</div>
+        <ul class="exp-bullets" style="margin-top: 0.5rem;">
+          <li>Full <strong>IaC pipeline</strong> from infrastructure definition to live environment</li>
+          <li>Git-triggered CI/CD with <strong>automated provisioning on push</strong></li>
+          <li>Hardened VM images via Packer with <strong>repeatable build specs</strong></li>
+          <li>PostgreSQL-backed <strong>state tracking</strong> for lab lifecycle management</li>
+          <li>AD-integrated identity with <strong>role-based student access</strong></li>
+          <li>Fully self-hosted stack — no cloud dependency</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- .NET Runtime Remediation -->
+    <div class="project-card">
+      <div class="project-tag orange">PowerShell · Endpoint Management</div>
+      <h3>.NET Runtime Remediation Framework</h3>
+      <p class="project-desc">
+        Enterprise-grade PowerShell framework deployed across 1,600+ endpoints at Kirby Risk.
+        Detects outdated or misconfigured .NET runtimes and remediates silently via NinjaOne RMM.
+        Handles complex registry context resolution, MSI routing logic, and edge-case runtime
+        versioning across mixed Windows environments.
+      </p>
+      <div class="tech-stack">
+        <span class="tech-pill">PowerShell</span>
+        <span class="tech-pill">NinjaOne RMM</span>
+        <span class="tech-pill">Registry Automation</span>
+        <span class="tech-pill">.NET / MSI</span>
+      </div>
+      <div class="project-number">02</div>
+    </div>
+
+    <!-- Office Security Policy Tool -->
+    <div class="project-card">
+      <div class="project-tag">PowerShell · Security Hardening</div>
+      <h3>Office Security Policy Enforcement</h3>
+      <p class="project-desc">
+        Automated enforcement tool for Microsoft Office security policies across the Kirby Risk
+        endpoint fleet. Validates and remediates macro settings, trusted locations, and Group
+        Policy-aligned registry values — deployed silently at scale via RMM. Built to handle
+        PSScriptAnalyzer StrictMode constraints and cross-version Office detection.
+      </p>
+      <div class="tech-stack">
+        <span class="tech-pill">PowerShell</span>
+        <span class="tech-pill">Group Policy</span>
+        <span class="tech-pill">Microsoft Office</span>
+        <span class="tech-pill">NinjaOne</span>
+      </div>
+      <div class="project-number">03</div>
+    </div>
+
+
+
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header fade-in">
+    <span class="section-num">03</span>
+    <h2>Experience</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="exp-timeline fade-in">
+
+    <div class="exp-item">
+      <div class="exp-date">
+        <div class="exp-dot"></div>
+        January 2026 – Present
+      </div>
+      <div>
+        <div class="exp-role">Systems &amp; Automation Intern</div>
+        <div class="exp-company orange">KIRBY RISK · Indiana</div>
+        <ul class="exp-bullets">
+          <li>Work directly in production — no sandbox, real endpoints from day one across a <strong>1,600+ device fleet</strong></li>
+          <li>Designed and deployed a <strong>.NET runtime remediation framework</strong> via NinjaOne RMM, handling complex registry logic, MSI routing, and cross-version detection</li>
+          <li>Built a <strong>Microsoft Office security policy enforcement tool</strong> that validates and remediates macro settings and GPO-aligned registry values at scale</li>
+          <li>Built a <strong>device onboarding UI</strong> in CSS/JavaScript for streamlined provisioning workflows</li>
+          <li>Support <strong>vulnerability management</strong> operations using Tenable and NinjaOne alongside senior engineers</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">
+        <div class="exp-dot"></div>
+        Aug 2024 – May 2026
+      </div>
+      <div>
+        <div class="exp-role">B.S. Computer Information Technology</div>
+        <div class="exp-company">BALL STATE UNIVERSITY · Muncie, IN</div>
+        <ul class="exp-bullets">
+          <li>Concentration: <strong>Networking Infrastructure</strong></li>
+          <li>Completed a 20-credit-hour final semester while simultaneously working and building ChirpLabs</li>
+          <li>Capstone project recognized as a full-stack infrastructure automation platform</li>
+          <li>Coursework: Network Security, Systems Administration, Cloud Fundamentals, Infrastructure Automation</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header fade-in">
+    <span class="section-num">04</span>
+    <h2>Skills &amp; Certifications</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="skills-layout fade-in">
+    <div class="skill-group">
+      <div class="skill-group-title">Infrastructure &amp; IaC</div>
+      <ul class="skill-list">
+        <li>Terraform / HCL</li>
+        <li>Packer</li>
+        <li>Ansible</li>
+        <li>Proxmox VE</li>
+        <li>Docker / Containers</li>
+        <li>Active Directory</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title orange">Networking &amp; Security</div>
+      <ul class="skill-list">
+        <li>VLANs / Layer 2–3 Design</li>
+        <li>Tenable Vulnerability Mgmt</li>
+        <li>NinjaOne RMM</li>
+        <li>TCP/IP, DNS, DHCP</li>
+        <li>PKI / Certificate Management</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title dim">Automation &amp; Development</div>
+      <ul class="skill-list">
+        <li>PowerShell (Advanced)</li>
+        <li>Bash / Shell Scripting</li>
+        <li>Python (scripting)</li>
+        <li>Git / Forgejo / GitLab CE</li>
+        <li>CI/CD Pipeline Design</li>
+        <li>PostgreSQL</li>
+        <li>REST APIs / JSON</li>
+        <li>HTML / CSS / JavaScript</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Cloud &amp; Platforms</div>
+      <ul class="skill-list">
+        <li>AWS (SAA in progress)</li>
+        <li>Windows Server</li>
+        <li>Ubuntu / Debian Linux</li>
+        <li>Group Policy (GPO)</li>
+        <li>Hyper-V</li>
+        <li>Microsoft 365 / Intune</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title orange">Professional Skills</div>
+      <ul class="skill-list">
+        <li>Technical Documentation</li>
+        <li>Cross-team Collaboration</li>
+        <li>Problem Decomposition</li>
+        <li>Root Cause Analysis</li>
+        <li>Stakeholder Communication</li>
+        <li>Self-directed Learning</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title dim">Methodologies</div>
+      <ul class="skill-list">
+        <li>Infrastructure as Code</li>
+        <li>GitOps</li>
+        <li>Agile / Kanban</li>
+        <li>Defense in Depth</li>
+        <li>Least Privilege</li>
+        <li>Zero Trust Principles</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="certs-row fade-in">
+    <div class="cert-badge active">
+      <div class="cert-name">CCST</div>
+      <div class="cert-issuer">Cisco Certified Support Technician</div>
+    </div>
+    <div class="cert-badge in-progress">
+      <div class="cert-name">CompTIA Security+</div>
+      <div class="cert-issuer">CompTIA</div>
+    </div>
+    <div class="cert-badge in-progress">
+      <div class="cert-name">AWS SAA-C03</div>
+      <div class="cert-issuer">Amazon Web Services</div>
+    </div>
+    <div class="cert-badge">
+      <div class="cert-name">CCNA</div>
+      <div class="cert-issuer">Cisco — Long-term Goal</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header fade-in">
+    <span class="section-num">05</span>
+    <h2>Let's Connect</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="contact-grid fade-in">
+    <div>
+      <div class="contact-intro">
+        Open to cloud &amp; DevSecOps<br>
+        <span>opportunities.</span>
+      </div>
+      <p class="contact-sub">
+        I'm actively building toward a cloud engineering or DevSecOps role. If you're looking for
+        someone who can build infrastructure, automate at scale, and learn anything in front of them —
+        let's talk.
+      </p>
+      <div class="contact-links">
+        <a href="https://linkedin.com/in/your-linkedin" class="contact-link" target="_blank">
+          <span class="contact-link-icon">LINKEDIN</span>
+          <span class="contact-link-text">linkedin.com/in/your-linkedin</span>
+        </a>
+        <a href="mailto:your.email@example.com" class="contact-link">
+          <span class="contact-link-icon">EMAIL</span>
+          <span class="contact-link-text">your.email@example.com</span>
+        </a>
+        <a href="https://github.com/your-github" class="contact-link" target="_blank">
+          <span class="contact-link-icon">GITHUB</span>
+          <span class="contact-link-text">github.com/your-github</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Liam · Systems &amp; Automation Engineer</p>
+  <p>Built with HTML/CSS · Muncie, Indiana</p>
+</footer>
+
+<script>
+  // Intersection Observer for fade-in animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Staggered delays for grid children
+  document.querySelectorAll('.project-grid .project-card, .skills-layout .skill-group, .certs-row .cert-badge').forEach((el, i) => {
+    el.classList.add('fade-in');
+    el.style.transitionDelay = `${i * 0.08}s`;
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
